@@ -1,0 +1,17 @@
+There is at least one extra clock-cycle for every load or store operation.
+Since there are two arrays in addition to the third array where the
+sums are being stored, each loop has 2 load operations and 1 store operations, 
+so on a multi-processor computer with the bus arbiter, it will take three
+extra clock-cycles for each loops, where normally it would take three clock
+cycles to complete a loop. It will take twice as long as on an original 
+processor. For an array length of 100, the original processor would take
+300 clock cycles. With the bus arbiter, it would take 600 clock cycles. 
+
+If both CPUs are executing the same program, in the worst case, an extra
+clock-cycle is required for sequential LD/ST operation from independent 
+interactions with the bus-arbiter. Assuming the worst case where the processors
+take turns releasing the bus and making requests, the arbiter will need to
+take an extra clock-cycle each time toggling between processors and granting 
+the processor access to the bus for each LD/ST operation. In the worst case, 
+the performance would take twice as long. 
+

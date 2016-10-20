@@ -1,0 +1,53 @@
+// High level pseudocode 
+if (head != NULL && tail != NULL) {
+    if (head != tail) {
+    listNode temp
+    temp = head
+        while (temp != tail){
+            push onto stack
+            temp = temp->next
+        }
+    listNode b = tail
+        while (b != head) {
+            temp = pop(stack)
+            b->next = temp
+            b = temp
+        }
+    b->next = null
+    }
+}
+
+// translate into simpler constructs 
+reverse:
+    testl head, head    // if null, done
+    je reverse_ret
+    testl tail, tail    // if null, done
+    je reverse_ret
+    cmpl head, tail     // if equal, done
+    je reverse_ret
+
+push_list: // push elem
+    push    newHead   // initially newHead = head
+iterate_push: 
+    mov     head->next, newHead
+    cmp     newHead, tail
+    jne     push_list
+
+
+pop_list:   // pop elem
+    pop    temp         # get the last node on stack
+    mov   temp, tail->next  # point tail to last node
+    cmp    temp, head   # check if at beginning
+    je     reverse_ret
+
+iterate_pop: // else, falls through
+    pop    b         # get next node on stack
+    mov   b, temp->next  # point tail
+    cmp    b, head  # check if at beginning
+    je    done
+pop_continue:
+    mov  b, temp   # iterate
+    jmp  iterate_pop
+
+done:
+    ret

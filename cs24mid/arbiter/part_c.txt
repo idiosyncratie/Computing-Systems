@@ -1,0 +1,21 @@
+the program in (b) should use BLK and BUN around its LD and ST operations like:
+
+Loop:
+	BLK
+	LD R0, R3 # R3 = Memory[R0]
+	LD R1, R4 # R4 = Memory[R1]
+	ADD R3, R4, R5 # R5 = R3 + R4
+	ST R5, R7 # Memory[R7] = R5
+	BUN
+	INC R0 
+	etc... 
+
+Doing this means none of the load and store operations in the loop need to 
+acquire access to the bus after the first time. In both cases where a single 
+CPU is running the program and both CPUs are running the program, LD/ST 
+operations go back to taking one clock cycle to complete. For a single CPU, 
+the program will take the same amount of time the multi-processor computer with
+the bus arbiter will take as the original processor. For both CPUs running the
+program, at worst case it will take twice as long because BLK and BUN take 
+two or more cycles to complete, so if the CPUs alternate requests, it will take
+an extra cycle to toggle between processors. 

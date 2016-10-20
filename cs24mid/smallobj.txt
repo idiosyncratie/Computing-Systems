@@ -1,0 +1,71 @@
+1. The objects are all of approximately the same size and used for 
+similar period of time such that the overall memory usage of the program stays
+constant. If a free-list is used, this behavior will generally not cause 
+allocation failures due to memory fragmentation. Memory fragmentation usually 
+occurrs because the program tries to allocate a block too large for the 
+available memory in the free-list, which is not an issue here where the objects
+are of similar size, so reasonably there should always be a block of sufficient
+space. In addition, there should always be sufficient free memory available 
+since the program is freeing objects at a speed that the overall memory usage
+isn't increasing. 
+
+2. The allocator will probably still run into fragmentation issues because
+when the blocks are allocated, there could be a tiny segment of memory left 
+unallocated just beyond the new process. The overall memory usage, although it
+isn't actually increasing, will be shown to be increasing because of the 
+fragmentation. 
+Using an implicit free list will greatly lengthen the search time for a free 
+block because many small objects are being searched. Scanning all the small
+objects, both free and allocated, will make the combination of allocator and 
+program behavior inefficient. 
+In the explicit free list approach, the more efficient approaches also have 
+flaws. Maintaining the free-list in LIFO order is a faster approach for 
+allocation but will increase the likelihood of memory fragmentation here because 
+the free memory being allocated is first-fit, not best-fit. Maintaining in 
+address order is less inefficient in terms of memory usage but is slower due to
+ linear-time insertion sort when freeing. 
+
+3. The "small object allocator" has a faster approach than the general-purpose
+allocator since it will be placed in a chunk until the chunk is filled up, and
+chunks will be created on allocation request. The allocation does not use any 
+sorting to assign blocks, making it efficient in terms of time. Another benefit
+is that it points to the next available block for allocating so the allocator
+does not need to search through the entire list each time it wants to allocate.
+
+An issue with the "small object allocator" is that it is inefficient in memory
+usage. The allocation services a fixed number of requests and does not use any
+ sorting to assign blocks, so it does not find the best fit, and even if there 
+ is space for more blocks in the chunk, that memory will not be used because the 
+chunk has used its max number of requests. When freeing the blocks, the memory
+of a filled chunk is not used until all the objects in the chunk have been 
+released. Unlike the general-purpose heap allocator which faced a chance of 
+increased overall memory usage because of heap allocators, the "small object 
+allocator" faces incredible memory usage inefficiency because entire chunks of
+memory might be left unused because a few small objects have not been freed. N 
+is a large number in the thousands, so memory that could fit thousands of 
+objects will be left unused and considered "used" in the this allocator.
+
+4. Where large chunks of memory were left "used" for a relatively short amount 
+of time previously but would eventually be freed, the memory will be left 
+unusable for much longer now in the small-object allocator. Around 5-10% of the 
+objects will use large chunks since those chunks do not have all the memory 
+freed, and the chunks not be deallocated for a long time. This means allocations
+will be made in the remaining chunks, which will also then contain objects that
+have much longer lifetimes. This will cause an increasing number of chunks to be
+allocated for an increasing amount of time. Large amounts of memory will be 
+wasted in the small-object allocator from this kind of behavior. In the long
+run, allocation failure will occur because there will be not be enough memory
+to allocate the objects. 
+
+5. When freeing from the small-object allocator, it is recorded that an object 
+was freed,. Instead of only freeing after all the objects have been recorded as
+freed, the objects should actually be freed. When memory is allocated, the free
+ memory should be tested first to see if it fits. To make this faster, a free-
+list can be maintained with pointers to the free blocks and a note on the size
+of each block, so the allocator can traverse the list to find a free block of
+sufficient size. This will greatly reduce the problem of memory usage the 
+allocator had of wasted memory where no object was freed unless all were to be. 
+It will result in a slower approach but increase memory efficiency. Since some
+objects will have much longer lifelines, the other free blocks in the chunk the
+object is located in can be continuously be filled by short-lived objects, so
+overall memory inefficiency is greatly reduced. 
