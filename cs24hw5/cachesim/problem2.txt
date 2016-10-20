@@ -1,0 +1,24 @@
+(d) ./heaptests 32:256:1
+Cache reads=387851976 writes=156711356 hits=531488886 misses=13074446
+miss-rate=2.40% random replacement policy
+Memory reads = 418382272 writes = 334897760
+
+
+e) ./heaptests 32:1:256
+Cache reads=387851976 writes=156711356 hits=531217776 misses=13345556
+miss-rate = 2.45% random replacement policy
+Memory reads = 427057792 writes = 345422560
+
+
+g) Updated to Least Recently Used replacement policy
+
+    d) ./heaptests 32:256:1
+Cache reads=387851976 writes=156711356 hits=531488886 misses=13074446
+miss-rate=2.40% LRU replacement policy
+Memory reads = 418382272 writes = 334897760
+
+
+    e) ./heaptests 32:1:256
+Cache reads=387851976 writes=156711356 hits=532270889 misses=12292443
+miss-rate=2.26% LRU replacement policy
+Memory reads = 393358176 writes = 315978048

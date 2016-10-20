@@ -1,0 +1,18 @@
+a) cache-timing equations 
+x = number of cache misses
+y = number of successes
+101*x + y = 3,000,000,000
+x + y = 750,000,000 
+
+x = 22,500,000
+The miss rate is 3%
+
+
+b) To double performance we want twice the number of instructions per second
+x = number of cache misses
+y = number of successes
+101*x + y = 3,000,000,000
+x + y = 1,500,000,000 
+x = 15,000,000
+ The new miss rate is 1%, so the miss rate needs to be reduced
+ by 2%. 
