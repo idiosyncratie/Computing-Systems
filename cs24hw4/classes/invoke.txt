@@ -1,0 +1,6 @@
+mov 8(%ebp), %edx 	# save the shape in edx
+mov (%edx), %eax	# dereferences the shape to retrieve pointers
+					# to access its class pointer
+mov (%eax), %eax	# dereference pointer to getVol for the particular shape
+push %edx 			# push Sphere_Data *this to access volume function
+call %eax			# call volume function on shape
