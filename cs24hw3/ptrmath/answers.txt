@@ -1,0 +1,39 @@
+Answers for the "Arrays, Pointer Arithmetic, and Structs" section of CS24 HW3:
+
+Part 1:
+set all bytes to 0              
+        byte
+        0-3       00000000
+        4-7       00000000
+        8-11      00000000
+        12-16     00000000
+shift right 3 bytes to (p + 3). 0xDEADBEEF is written little-endian  
+        byte
+        0-3       000EFBEA
+        4-7       DDE00000
+        8-11      00000000
+        12-16     00000000    
+shift right 12 bytes to p because p is cast into an int and ints are 4 bytes,
+ so *((int *)p) + 3 shifts 0xCAFEBABE 3 * 4 bytes. 
+
+        byte
+        0-3       000EFBEA
+        4-7       DDE00000
+        8-11      00000000
+        12-16     BEBAFECA
+
+
+Part 2:
+Member                  Offset  Size
+int id                  0       4 bytes
+char code[5]            4       5 bytes use/ 3 unused
+struct entry *next      12      4 bytes  
+code[5] is followed by 3 unused bytes to proper align
+*next. *next is followed by 3 unused bytes.
+3 bytes in total would be unused. The struct's total size is 16 bytes. 
+
+Part 3: 
+arr[4].code[3] = 
+Each arr is 16 bytes, so allocate first 4 arrs + id + char[3]
+    = 16 * 4 + 4 + 3 = 64 + 4 + 3
+offset = 71 bytes

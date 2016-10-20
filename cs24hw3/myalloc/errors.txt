@@ -1,0 +1,21 @@
+(a)
+	Because the address did not originate from myalloc(), it will not have
+	a header and a footer, so logically, the allocator would segfault because
+	it is not located at an address that it will be able to read.
+
+	Freeing an address within a memory block returned by myalloc() will also
+	segfault because it will not be able to read a header or a footer, so 
+	myfree() would also not be able to read the address properly.
+
+	For an address that has already been freed, myfree() will attempt to
+	free the address and absolute value the size stored in the header. Since
+	we are freeing an already freed address, the size will stay the same after
+	being updated twice.
+
+(b) 
+    To make allocation more robust, an explicit free list could be made with
+    a linked list that contains the address of each free memory block, so that 
+    alloc only checks the free blocks instead of all the memory blocks, even the allocated ones. This free-list could be organized in LIFO order or 
+    maintained in address order. If the address being checked is not listed in 
+    the free linked list, then myalloc could flag the invalid use and 
+    release an error message. 

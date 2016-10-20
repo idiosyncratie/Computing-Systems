@@ -1,0 +1,21 @@
+#1: 
+	Values over 256 will overflow in bl at line 44-46, so when (%ecx, %esi) is
+	added to bl, it needs to be put into a larger register like %ebx. To fix 
+	the	byte problem, we can first move it into a one byte register and 
+	then add that value to a larger register like ebx. 
+
+#2: 
+    At line 48, The format is to decode is, for example, 3A2B, so to forward 
+    to the next count, we would increment twice instead of once to go from one 
+    counter, 3, to the next, 2. 
+#3:
+ 	At line 64, functions called change registers so we need to push registers
+  before we call and pop afterwards, so that ecx will hold the same data
+  after malloc is called
+
+#4:
+    At line 83, we need to increment where we write at line 80. 
+    Otherwise, when         
+        mov     %bl, (%eax, %edi)
+    is called, bl will be moved to the same place since %edi is never 
+    incremented.
