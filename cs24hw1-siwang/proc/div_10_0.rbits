@@ -1,0 +1,8 @@
+000A		# 10: the dividend
+0000    	# 0: the divisor
+0000		# constant 0
+0001		# constant 1
+80000000 	# 10000000 : mask
+ffff
+0000		# 0: the quotient 
+0000		# remainder

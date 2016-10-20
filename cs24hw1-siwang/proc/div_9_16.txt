@@ -1,0 +1,54 @@
+Loading instruction store.
+Storing istore[0] = 3C7
+Storing istore[1] = BCF
+Storing istore[2] = 23E5
+Storing istore[3] = 2946
+Storing istore[4] = 39E
+Storing istore[5] = 28C1
+Storing istore[6] = 3CF
+Storing istore[7] = 3C00
+Read complete.
+Loading register file.
+Storing rfmem[0] = 9
+Storing rfmem[1] = 10
+Storing rfmem[2] = 0
+Storing rfmem[3] = 1
+Storing rfmem[4] = 80000000
+Storing rfmem[5] = FFFF
+Storing rfmem[6] = 0
+Storing rfmem[7] = 0
+Running processor.
+
+T=0	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:FFFF 6:0 7:0 
+
+T=1	PC=0	ALUOP=0	W=1	SRC1=7	SRC2=0	DST=7	BRA=7
+	RF1=0	RF2=9	ALUOUT=9	BR?=0
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:FFFF 6:0 7:9 
+
+T=2	PC=1	ALUOP=2	W=1	SRC1=7	SRC2=1	DST=7	BRA=F
+	RF1=9	RF2=10	ALUOUT=FFFFFFF9	BR?=0
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:FFFF 6:0 7:FFFFFFF9 
+
+T=3	PC=2	ALUOP=8	W=1	SRC1=7	SRC2=4	DST=5	BRA=25
+	RF1=FFFFFFF9	RF2=80000000	ALUOUT=80000000	BR?=0
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:80000000 6:0 7:FFFFFFF9 
+
+T=4	PC=5	ALUOP=A	W=0	SRC1=5	SRC2=0	DST=6	BRA=6
+	RF1=80000000	RF2=9	ALUOUT=0	BR?=1
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:80000000 6:0 7:FFFFFFF9 
+
+T=5	PC=6	ALUOP=0	W=1	SRC1=7	SRC2=1	DST=7	BRA=F
+	RF1=FFFFFFF9	RF2=10	ALUOUT=9	BR?=0
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:80000000 6:0 7:9 
+
+T=6	PC=7	ALUOP=F	W=0	SRC1=0	SRC2=0	DST=0	BRA=0
+	RF1=9	RF2=9	ALUOUT=0	BR?=0
+
+	Register File: 0:9 1:10 2:0 3:1 4:80000000 5:80000000 6:0 7:9 
+
+Program terminated normally.

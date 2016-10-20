@@ -1,0 +1,8 @@
+CS:APP2e Practice Problem 2.46, pp. 102-103
+
+A. 	Looking at the nonterminating sequence of 0.1 in the text, the binary representation of 0.1 - x will have 2 bits to the right of the rounding posiion shown. x - 0.1 will have a 
+binary representation: 0.000000000000000000000001100[1100].... 
+
+B. From A, 0.1 - x is about 1/10 * 2^-20, which is about 9.54 * 10^-8
+C. 100 * 60 * 60 * 10 * (9.54 * 10 ^-8) is about 0.343 sec
+D. 2000 * (0.343) is about 687 meters

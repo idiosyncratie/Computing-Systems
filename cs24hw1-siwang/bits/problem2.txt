@@ -1,0 +1,15 @@
+Problem 2 -
+
+n = n & (n - 1)
+If n & (n - 1) == 0 if they never have a 1 bit in the same
+place. For example, if n is 1000 0000, then n - 1 is 0111 1111,
+so n & (n - 1) is 0000 0000. 
+n - 1 will look like n in that when 1 is subtracted from n, the least 
+significant bit is flipped to 0 if it is 1. If it is 0, then each increasingly
+larger bit will be changed from 0 to 1 until a 1 is found. This 1 will be 
+changed to 0. 
+
+Any n will have the format 10..0 for k zeros where k >= 0. Therefore, n - 1 will have the format 01...1 for k - 1 ones where k >= 0. Therefore, n & (n - 1) will end in k zeros since
+10...0 & 011..11 = 000..000. 
+
+Therefore, n & (n - 1) eliminates the rightmost '1' (for example: 111 & 110 = 110 where n = 111). Each iteration of the expression removes the rightmost '1', so that we can count the number of 1's in n.

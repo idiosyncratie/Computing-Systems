@@ -1,0 +1,8 @@
+03c7	# 0)ADD R, divid, R	0x00 111  000 1  111	 
+0bcf	# WHILE: [0001]:  1)	SUB R, Ds, R 	0x02 111  001 1  111
+23e5	# 2)	AND R, mask, R5 0x08 111  100 1  101
+2946	# 3)	BNZ R5, DONE	0x0A 101  0110
+039e	# 4)	ADD Q, 1, Q 	0x00 110  011 1  110
+28c1	# 5)	BNZ 1, WHILE 	0x0A 011  0001
+03cf	# DONE: [0110] 6)	ADD R, Ds, R 	0x00 111  001 1  111
+3c00  #   done       -- finished, exit leaving results

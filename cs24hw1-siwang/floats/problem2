@@ -1,0 +1,19 @@
+Order for adding floating point numbers matters to get the most precise answer. 
+Adding two values of similar magnitudes will give a more accurate result than
+adding two values of very different magnitudes. For example, if we add 2 values 
+that are close to 1/10000000000, then the sum will give a number close to 1/10000000000,
+ but if we add 1 + 1/10000000000, then the sum will be 1 due to loss of precision. 
+ Therefore, it would be more accurate add floating point numbers in ascending
+ order than in random order because that would first sum up the very small numbers
+ and then move onto the larger numbers. This would ensure the least loss of precision. 
+ The most accurate would be ascending, then random, then descending. 
+ For example, if we were adding 1 and 1 billion 1/(1 billion), then for addition for
+ 	ascending: 1/(1 billion) + .... + 1  = 2
+ 	random: 1/(1 billion) + .. + 1 + 1/(1 billion) = 1.00..... (for example) 
+ 		random will yield a number n for 1 <= n <= 2
+ 	descending: 1 + .... + 1/(1 billion) = 1
+
+
+ 	Even adding in ascending order would be inaccurate if you had inputs like: 
+ 		1 + 1.0000000001 + 1.0000000001 = 3 instead of 3.0000000002
+ 	due to loss of precision

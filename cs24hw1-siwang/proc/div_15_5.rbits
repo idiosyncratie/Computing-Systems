@@ -1,0 +1,8 @@
+000f		# 15: the dividend
+0005    	# 05: the divisor
+0000
+0001
+80000000 	# 10000000 : mask for signs
+ffff
+0000		# 0: the quotient [Ans: 3]
+0000		# remainder [Ans: 0]
