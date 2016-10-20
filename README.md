@@ -1,4 +1,5 @@
 # Computing-Systems
+Instructions for unzipping tgz files in hw1 pdf
 1) Floating-point summation, Programmable Branching Processor
 2) Snippet problems, factorial (IA32)
 3) Pointer Arithmetic, RLE Decoder, Explicit Allocator
