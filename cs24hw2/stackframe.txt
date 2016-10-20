@@ -1,0 +1,26 @@
+fact(3)
+
+Stack   Content             Description
+0x1004  3                   First argument for fact
+0x1000  return address      the caller's return address. When the function is
+                            called, a return address is pushed
+0xFFFC  base pointer        caller's base pointer
+0xFFF8  2                   pushes 3-1 for recursive call 
+                            and is the argument for the next call
+
+0xFFF4  0x2030              call fact_resume, acts as a return address
+0xFFF0  0xFFFC              push the old base pointer
+                            this is the new base pointer of the first level
+0xFFEC  1                   push 2 - 1 for recursive call
+                            and is the argument for the next call
+
+0xFFE8  0x2030              call fact_resume,  acts as a return address
+0xFFE4  0xFFF0              push the old base pointer
+                            this is the new base pointer of the second level
+0xFFE0  0                   push 1 - 1 for recursive call
+                            and is the argument for the next call
+
+0xFFDC  0x2030              call fact_resume, acts as a return address
+0xFFD8  0xFFE4              push the old base pointer
+                            this is the new base pointer of the third level
+ 

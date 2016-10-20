@@ -1,0 +1,11 @@
+movl 8(%ebp), %eax  // moves doubleword x[8(%ebp)] into %eax
+imull $3, %eax      // multiply dword value 3 and %eax
+addl $12, %eax      // adds the dword value 12 and %eax
+imull 8(%ebp), %eax // multiply dword x[8(%ebp)] and %eax
+subl $17, %eax      // subtracts the dword value 17 and %eax
+---
+y = x
+y = 3 * y       | y = 3x
+y = 12 + y      | y = 3x + 12
+y = x * y       | y = x(3x + 12)
+y = 17 * y      | y = x(3x + 12) - 17

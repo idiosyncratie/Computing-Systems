@@ -1,0 +1,56 @@
+line-by-line work: 
+    push base pointer
+    move stack pointer into base pointer
+    get x   (into %eax)
+    get n   (into %edx)
+    compare index = n - 50
+    compare index : 5
+    if index > 5, goto switch_prob+0x2S (default)
+    goto *jt(index) 
+    /* the following memory addresses are listed in the jump table 
+    * memory */
+    At 0x08048438: // two cases in the jump table jump
+                    // to the same memory address
+            x = x << 2
+            goto 804844b // this address pops the base pointer
+                        // then returns the result
+    At 0x084843b:
+             x = x >> 2
+            goto 804844b (done)
+    At 0x08048442:
+             x = x + 2x
+            // if there is no implicit goto, so falls through
+    At 0x08048445:
+            x = x * x
+            // if there is no implicit goto, so falls through
+
+    At 0x08048448: // this is case 51 falls through to default 
+            x = x + 10
+    pop the base pointer and return x (%eax)
+
+
+int switch_prob(int x, int n)
+{
+    int result = x;
+        switch(n) {
+            case 50:
+            case 52: 
+                result = result << 2;
+                break;
+            case 53: 
+               result = result >> 2;
+                break;
+            case 54:
+                result = 3 * result;
+                // fals through
+            case 55:
+                result = result * result;
+                // falls through
+            case 51:
+                // falls through
+            default:
+                result = result + 10;
+        }
+
+    return result;
+}
